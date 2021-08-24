@@ -1,10 +1,9 @@
-import React, { Fragment, useEffect, useRef } from "react";
+import React, { Fragment, useRef } from "react";
 import { io } from "socket.io-client";
 import Peer from "peerjs";
 import "./Call.css";
 
 function Call() {
-  // useEffect(() => {
   const socket = io("http://localhost:4000/");
 
   const myPeer = new Peer(undefined, {

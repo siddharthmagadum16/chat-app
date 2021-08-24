@@ -34,6 +34,11 @@ io.on("connection", (socket) => {
       socket.broadcast.to(roomId).emit("user-disconnected", userId);
     });
   });
+
+  socket.on("new-message", (roomId, message) => {
+    console.log(`New message: ${message}`);
+    socket.broadcast.to(roomId).emit("chat", message);
+  });
 });
 
 server.listen(4000);

@@ -6,15 +6,18 @@ import "./Call.css";
 function Call() {
   const socket = io("http://localhost:4000/");
 
+  // const [gridLayout, setgridLayout] = useState("size0");
+
   const myPeer = new Peer(undefined, {
     host: "localhost",
     port: 9000,
-    path: "/",
+    path: "/peer-server",
   });
 
   const myVideo = document.createElement("video");
   myVideo.muted = true;
   const peers = {};
+  console.log(`${sessionStorage.getItem("roomId")}`); // to be remove later
 
   navigator.mediaDevices
     .getUserMedia({
@@ -24,7 +27,8 @@ function Call() {
     .then((stream) => {
       addVideoStream(myVideo, stream); // self video stream is added
       socket.on("user-connected", (userId) => {
-        console.log(`user connected from Call.js`);
+        // const objkeys = Object.keys(peers);
+        // setgridLayout(`size${objkeys.length}`);
         connectToNewUser(userId, stream);
       });
 
@@ -96,24 +100,28 @@ function Call() {
   function appendMessage(message) {
     const messageli = document.createElement("li");
     messageli.textContent = `${message}`;
-    console.log(`NEW message: ${message}`);
     document.getElementById("chat-list").appendChild(messageli);
     window.scrollTo(0, document.body.scrollHeight);
   }
 
   return (
     <Fragment>
-      <div id="video-grid"> </div>
-      <div>{sessionStorage.getItem("roomId")}</div>
-      <div>
-        <ul id="chat-list" ref={chatListRef}></ul>
-        <input type="text" id="text-input" ref={chatRef}></input>
+      <div id="call-component">
+        <div id="video-component">
+          <ul id="video-grid"></ul>
+        </div>
 
-        <input
-          type="button"
-          onClick={() => sendMessage(chatRef.current.value)}
-          value="Send"
-        ></input>
+        <div id="chat-component">
+          <ul id="chat-list" ref={chatListRef}></ul>
+          <div>
+            <input type="text" id="text-input" ref={chatRef}></input>
+            <input
+              type="button"
+              onClick={() => sendMessage(chatRef.current.value)}
+              value="Send"
+            ></input>
+          </div>
+        </div>
       </div>
     </Fragment>
   );

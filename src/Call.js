@@ -4,12 +4,13 @@ import Peer from "peerjs";
 import "./Call.css";
 
 function Call() {
-  const socket = io("http://localhost:4000/");
 
-  // const [gridLayout, setgridLayout] = useState("size0");
+  console.log(`env:  ${process.env.REACT_APP_ENV}`)
+  const url= process.env.REACT_APP_ENV==="PRODUCTION" ? "https://video-chat-heroku-server.herokuapp.com/" : "http://localhost:4000/";
+  const socket = io(url);
 
   const myPeer = new Peer(undefined, {
-    host: "localhost",
+    host: process.env.REACT_APP_ENV==="PRODUCTION" ? "video-chat-heroku-server.herokuapp.com" : "localhost",
     port: 9000,
     path: "/peer-server",
   });

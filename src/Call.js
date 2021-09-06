@@ -11,8 +11,8 @@ function Call() {
 
   const myPeer = new Peer(undefined, {
     host: process.env.REACT_APP_ENV==="PRODUCTION" ? "video-chat-heroku-server.herokuapp.com" : "localhost",
-    port: process.env.REACT_APP_PEER_PORT,
-    path: "peerjs/peerserver",
+    port: 443,
+    secure: true,
   });
 
   const myVideo = document.createElement("video");

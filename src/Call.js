@@ -14,7 +14,7 @@ function Call() {
     host: process.env.REACT_APP_ENV==="PRODUCTION" ? "video-chat-heroku-server.herokuapp.com" : "localhost",
     port: 9000,
     path: '/peer-server',
-    // secure: true // this doesn't work locally (http)
+    secure: true // this doesn't work locally (http)
   });
 
   const myVideo = document.createElement("video");

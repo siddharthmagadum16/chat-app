@@ -13,6 +13,7 @@ function Call() {
     host: process.env.REACT_APP_ENV==="PRODUCTION" ? "video-chat-heroku-server.herokuapp.com" : "localhost",
     port: 443,
     secure: true,
+    path: 'peerjs/peerserver'
   });
 
   const myVideo = document.createElement("video");

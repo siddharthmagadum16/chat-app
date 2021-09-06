@@ -11,7 +11,7 @@ function Call() {
 
   const myPeer = new Peer(undefined, {
     host: process.env.REACT_APP_ENV==="PRODUCTION" ? "video-chat-heroku-server.herokuapp.com" : "localhost",
-    port: 9000,
+    port: process.env.REACT_APP_PEER_PORT,
     path: "peerjs/peerserver",
   });
 
@@ -28,8 +28,6 @@ function Call() {
     .then((stream) => {
       addVideoStream(myVideo, stream); // self video stream is added
       socket.on("user-connected", (userId) => {
-        // const objkeys = Object.keys(peers);
-        // setgridLayout(`size${objkeys.length}`);
         connectToNewUser(userId, stream);
       });
 

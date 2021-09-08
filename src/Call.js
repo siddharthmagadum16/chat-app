@@ -38,8 +38,6 @@ function Call() {
         const video = document.createElement("video");
         call.on("stream", (userVideoStream) => {
           addVideoStream(video, userVideoStream); // incoming videostream is added
-        }, (err) => {
-          console.error('Failed to get local stream', err);
         });
       });
     });
@@ -59,8 +57,6 @@ function Call() {
     const video = document.createElement("video");
     call.on("stream", (userVideoStream) => {
       addVideoStream(video, userVideoStream);
-    }, (err) => {
-      console.error('Failed to get local stream', err);
     });
     call.on("close", () => {
       removeVideoStream(video);

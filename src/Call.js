@@ -144,6 +144,7 @@ function Call() {
         </div>
 
         <div id="chat-component">
+          <div>Room code: {sessionStorage.getItem("roomId")}</div>
           <ul id="chat-list" ref={chatListRef}></ul>
           <Box id="chat-input" component="div">
             <TextField

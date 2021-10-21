@@ -2,6 +2,12 @@ import React, { Fragment, useRef, useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import Peer from "peerjs";
 import "./Call.css";
+// import classNames from "classnames";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import "@mui/styled-engine";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 
 function Call() {
   console.log(`env:  ${process.env.REACT_APP_ENV}`);
@@ -23,7 +29,10 @@ function Call() {
   console.log(`${sessionStorage.getItem("roomId")}`); // to be remove later
 
   useEffect(() => {
-    sessionStorage.setItem("number_of_streams", 1);
+    sessionStorage.setItem("number_of_streams", 0);
+    return function cleanup() {
+      sessionStorage.setItem("number_of_streams", 0);
+    };
   }, []);
 
   navigator.mediaDevices
@@ -73,22 +82,26 @@ function Call() {
   const videolist = useRef();
 
   function addVideoStream(video, stream) {
+    // decreaseByOne();
     video.srcObject = stream;
     video.addEventListener("loadedmetadata", () => {
       video.play();
     });
-    video.className = "video-element";
-    let num_of_streams = sessionStorage.getItem("number_of_streams");
-
-    sessionStorage.setItem("number_of_streams", num_of_streams + 1);
+    // video.className = "video-element";
+    let num_of_streams = Number(sessionStorage.getItem("number_of_streams"));
+    num_of_streams += 1;
+    sessionStorage.setItem("number_of_streams", num_of_streams);
     videolist.current.appendChild(video);
+    // videolist.current.className = `stream${num_of_streams}`;
   }
 
   function removeVideoStream(video) {
     videolist.current.removeChild(video);
-    let num_of_streams = sessionStorage.getItem("number_of_streams");
-    if (num_of_streams > 1)
-      sessionStorage.setItem("number_of_streams", num_of_streams - 1);
+    let num_of_streams = Number(sessionStorage.getItem("number_of_streams"));
+    if (num_of_streams > 1) {
+      num_of_streams -= 1;
+      sessionStorage.setItem("number_of_streams", num_of_streams);
+    }
   }
 
   // --------chat part --------------------------------------------
@@ -101,39 +114,26 @@ function Call() {
 
   function sendMessage(message) {
     if (message) {
-      appendMessage(message);
+      appendMessage(message, true);
       console.log(`sendMessage: ${message}`);
       socket.emit("new-message", sessionStorage.getItem("roomId"), message);
       chatRef.current.value = "";
     }
   }
 
-  function appendMessage(message) {
+  function appendMessage(message, self) {
     const messageli = document.createElement("li"); // this needs to be converted
     messageli.textContent = `${message}`;
+    if (self === true) messageli.className = "message selfmsg";
+    else messageli.className = "message";
     document.getElementById("chat-list").appendChild(messageli);
-    window.scrollTo(0, document.body.scrollHeight);
+    // window.scrollTo(0, document.body.scrollHeight);
+    let chat_list = document.getElementById("chat-list");
+    chat_list.scrollTop = chat_list.scrollHeight;
   }
 
   function onKeyDownHandler(event) {
     if (event.keyCode === 13) sendMessage(chatRef.current.value);
-  }
-
-  let num_of_streams = sessionStorage.getItem("number_of_streams");
-
-  // dynamic styling of video element size --- temporary
-  if (num_of_streams === 1) {
-    videolist.current.style.width = "1fr";
-    videolist.current.style.height = "1fr";
-  } else if (num_of_streams > 1 && num_of_streams <= 4) {
-    videolist.current.style.width = "2fr";
-    videolist.current.style.height = "2fr";
-  } else if (num_of_streams > 4 && num_of_streams <= 6) {
-    videolist.current.style.width = "2fr";
-    videolist.current.style.height = "3fr";
-  } else if (num_of_streams > 6 && num_of_streams <= 9) {
-    videolist.current.style.width = "3fr";
-    videolist.current.style.height = "3fr";
   }
 
   return (
@@ -145,20 +145,24 @@ function Call() {
 
         <div id="chat-component">
           <ul id="chat-list" ref={chatListRef}></ul>
-          <div>
-            <input
-              type="text"
-              id="text-input"
-              ref={chatRef}
+          <Box id="chat-input" component="div">
+            <TextField
+              id="standard-basic"
+              inputRef={chatRef}
               onKeyDown={(e) => onKeyDownHandler(e)}
-            ></input>
-            <input
-              type="button"
+              label="Type a message"
+              variant="standard"
+            />
+
+            <Button
+              id="sendbtn"
+              variant="contained"
               onClick={() => sendMessage(chatRef.current.value)}
-              value="Send"
-            ></input>
-          </div>
-          <div></div>
+              endIcon={<SendIcon />}
+            >
+              Send
+            </Button>
+          </Box>
         </div>
       </div>
     </Fragment>

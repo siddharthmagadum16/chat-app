@@ -8,6 +8,7 @@ import SendIcon from "@mui/icons-material/Send";
 import "@mui/styled-engine";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import copyImg from "./copy.png";
 
 function Call() {
   console.log(`env:  ${process.env.REACT_APP_ENV}`);
@@ -136,6 +137,18 @@ function Call() {
     if (event.keyCode === 13) sendMessage(chatRef.current.value);
   }
 
+  function copyRoomIdToClipboard() {
+    let newClip = sessionStorage.getItem("roomId");
+    navigator.clipboard.writeText(newClip).then(
+      function () {
+        console.log("copied to clipboard");
+      },
+      function () {
+        console.log("Clipboard copy failed");
+      }
+    );
+  }
+
   return (
     <Fragment>
       <div id="call-component">
@@ -144,10 +157,16 @@ function Call() {
         </div>
 
         <div id="chat-component">
-          <div>Room code: {sessionStorage.getItem("roomId")}</div>
+          <div id="room-info">
+            Room code:
+            <span id="roomId"> {sessionStorage.getItem("roomId")} </span>
+            <img src={copyImg} id="copy" onClick={() => {  copyRoomIdToClipboard();}} alt="" />
+          </div>
           <ul id="chat-list" ref={chatListRef}></ul>
           <Box id="chat-input" component="div">
             <TextField
+            sx={{ width: '260px' }}
+              autoFocus
               id="standard-basic"
               inputRef={chatRef}
               onKeyDown={(e) => onKeyDownHandler(e)}

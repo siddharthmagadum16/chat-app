@@ -8,12 +8,10 @@
   flex-wrap: wrap;
 }
 
-html {
-  background-color: red;
-}
 body {
-  background-color: cyan;
-  /* overflow: hidden; */
+  /* background: none; */
+  height: 100%;
+  overflow: hidden;
 }
 
 video {
@@ -28,6 +26,7 @@ video {
   height: 100%;
   padding: 0;
   margin: 0;
+  /* gap: 30px; */
 }
 
 #video-component {
@@ -36,15 +35,26 @@ video {
   background-color: rgb(159, 179, 238);
   margin: 0;
   padding: 0;
+
+  background: url("video-bg.svg") no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #chat-component {
+  height: 97%;
   flex: 3;
   background-color: #fa8072;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
+
+  background: url("chat-bg.svg") no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #chat-input {
@@ -83,8 +93,8 @@ video {
 
 .message {
   background-color: rgb(84, 223, 188);
-  border: 1px solid rgb(131, 32, 49);
-  border-radius: 10px;
+  border: 0;
+  border-radius: 10px 10px 10px 0;
   overflow-wrap: break-word;
   width: fit-content;
   max-width: 70%;
@@ -94,18 +104,36 @@ video {
   text-align: left;
   padding: 5px 7px;
 }
+
 .selfmsg {
   /* right: 0; */
+  border-radius: 10px 10px 0 10px;
   margin-left: auto;
   margin-right: 1rem;
 }
 
-.video-element {
+/* .video-element {
   border: 3px solid red;
+} */
+
+#room-info {
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
 }
 
-#chat-component > div {
-  padding: 10px;
+#copy {
+  background-color: rgb(240, 226, 228);
+  border-radius: 2px;
+  padding: 2px;
+  width: 20px;
+  height: 20px;
+}
+#copy:hover {
+  cursor: pointer;
+}
+#copy:active {
+  background-color: rgb(251, 255, 0);
 }
 
 .stream1 {

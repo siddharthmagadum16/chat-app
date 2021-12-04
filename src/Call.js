@@ -2,7 +2,6 @@ import React, { Fragment, useRef, useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import Peer from "peerjs";
 import "./Call.css";
-// import classNames from "classnames";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import "@mui/styled-engine";
@@ -27,7 +26,6 @@ function Call() {
   const myVideo = document.createElement("video");
   myVideo.muted = true;
   const peers = {};
-  console.log(`${sessionStorage.getItem("roomId")}`); // to be remove later
 
   useEffect(() => {
     sessionStorage.setItem("number_of_streams", 0);

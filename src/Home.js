@@ -35,7 +35,7 @@ function Home() {
             Enter Room
           </Button>
           <div className="text">OR</div>
-          <div className="text">Copy and Enter room code provided in joined room</div>
+          <div className="text">Enter the room code provided in the existing room</div>
 
           <TextField
             id="filled-basic roomid-input"

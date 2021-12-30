@@ -1,7 +1,5 @@
-#video-grid {
-  height: 99%;
-  /* width: 100%; */
-  /* position: absolute; */
+#video-list {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,9 +7,8 @@
 }
 
 body {
-  /* background: none; */
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 video {
@@ -26,15 +23,15 @@ video {
   height: 100%;
   padding: 0;
   margin: 0;
-  /* gap: 30px; */
 }
 
 #video-component {
   flex: 8;
-  height: 100%;
+  min-height: 100%;
   background-color: rgb(159, 179, 238);
   margin: 0;
   padding: 0;
+  position: relative;
 
   background: url("video-bg.svg") no-repeat;
   background-position: center;
@@ -43,7 +40,7 @@ video {
 }
 
 #chat-component {
-  height: 97%;
+  height: 100vh;
   flex: 3;
   background-color: #fa8072;
   display: flex;
@@ -62,8 +59,9 @@ video {
   justify-content: space-between;
   border-radius: 8px;
   padding: 10px;
-  margin-bottom: 7px;
+  /* margin-bottom: 7px; */
   width: 100%;
+  height: 60px;
   background-color: white;
 }
 
@@ -106,15 +104,10 @@ video {
 }
 
 .selfmsg {
-  /* right: 0; */
   border-radius: 10px 10px 0 10px;
   margin-left: auto;
   margin-right: 1rem;
 }
-
-/* .video-element {
-  border: 3px solid red;
-} */
 
 #room-info {
   padding: 10px;
@@ -123,8 +116,8 @@ video {
 }
 
 #copy {
-  background-color: rgb(240, 226, 228);
-  border-radius: 2px;
+  background-color: rgba(184, 183, 183, 0.678);
+  border-radius: 8px;
   padding: 2px;
   width: 20px;
   height: 20px;
@@ -133,7 +126,7 @@ video {
   cursor: pointer;
 }
 #copy:active {
-  background-color: rgb(251, 255, 0);
+  background-color: rgba(0, 255, 13, 0.548);
 }
 
 .stream1 {
@@ -144,4 +137,17 @@ video {
 }
 .stream3 {
   border: 4px solid rgb(22, 209, 223);
+}
+
+.footer {
+  height: 60px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: #808080;
+}
+
+#leavebtn {
+  margin: 10px;
 }

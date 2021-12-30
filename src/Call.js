@@ -7,6 +7,7 @@ import SendIcon from "@mui/icons-material/Send";
 import "@mui/styled-engine";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import { Container } from "@mui/material";
 import copyImg from "./copy.png";
 
 function Call() {
@@ -90,7 +91,7 @@ function Call() {
     let num_of_streams = Number(sessionStorage.getItem("number_of_streams"));
     num_of_streams += 1;
     sessionStorage.setItem("number_of_streams", num_of_streams);
-    videolist.current.appendChild(video);
+    // videolist.current.appendChild(video);
     // videolist.current.className = `stream${num_of_streams}`;
   }
 
@@ -151,19 +152,35 @@ function Call() {
     <Fragment>
       <div id="call-component">
         <div id="video-component">
-          <div id="video-grid" ref={videolist}></div>
+          <div id="video-list" ref={videolist}></div>
+          <Box class="footer">
+            <Button
+              id="leavebtn"
+              variant="contained"
+              onClick={() => window.history.back()}
+            >
+              Leave
+            </Button>
+          </Box>
         </div>
 
         <div id="chat-component">
           <div id="room-info">
             Room code:
             <span id="roomId"> {sessionStorage.getItem("roomId")} </span>
-            <img src={copyImg} id="copy" onClick={() => {  copyRoomIdToClipboard();}} alt="" />
+            <img
+              src={copyImg}
+              id="copy"
+              onClick={() => {
+                copyRoomIdToClipboard();
+              }}
+              alt="copy"
+            />
           </div>
           <ul id="chat-list" ref={chatListRef}></ul>
           <Box id="chat-input" component="div">
             <TextField
-            sx={{ width: '260px' }}
+              sx={{ width: "260px" }}
               autoFocus
               id="standard-basic"
               inputRef={chatRef}

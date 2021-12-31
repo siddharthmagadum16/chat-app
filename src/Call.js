@@ -91,7 +91,7 @@ function Call() {
     let num_of_streams = Number(sessionStorage.getItem("number_of_streams"));
     num_of_streams += 1;
     sessionStorage.setItem("number_of_streams", num_of_streams);
-    // videolist.current.appendChild(video);
+    videolist.current.appendChild(video);
     // videolist.current.className = `stream${num_of_streams}`;
   }
 
@@ -157,6 +157,7 @@ function Call() {
             <Button
               id="leavebtn"
               variant="contained"
+              // disableElevation
               onClick={() => window.history.back()}
             >
               Leave
@@ -177,6 +178,7 @@ function Call() {
               alt="copy"
             />
           </div>
+          {/* {/* */}
           <ul id="chat-list" ref={chatListRef}></ul>
           <Box id="chat-input" component="div">
             <TextField
@@ -192,12 +194,14 @@ function Call() {
             <Button
               id="sendbtn"
               variant="contained"
+              disableElevation
               onClick={() => sendMessage(chatRef.current.value)}
               endIcon={<SendIcon />}
             >
               Send
             </Button>
           </Box>
+          {/* */}
         </div>
       </div>
     </Fragment>

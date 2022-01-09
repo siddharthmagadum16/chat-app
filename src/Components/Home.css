@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');
 
 body {
-  background: url("home-16-9.svg") no-repeat;
+  background: url("../Assets/svg/home-16-9.svg") no-repeat;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -20,8 +20,6 @@ body {
   border-radius: 20px;
 
   /* background: linear-gradient( to right, rgba(248, 210, 210, 0.479),rgb(44, 92, 63)); */
-
-
 }
 
 #home-container > * {

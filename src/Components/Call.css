@@ -32,7 +32,7 @@ video {
   padding: 0;
   position: relative;
 
-  background: url("video-bg.svg") no-repeat;
+  background: url("../Assets/svg/video-bg.svg") no-repeat;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -46,7 +46,7 @@ video {
   display: flex;
   flex-direction: column;
 
-  background: url("chat-bg.svg") no-repeat;
+  background: url("../Assets/svg/chat-bg.svg") no-repeat;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -89,6 +89,7 @@ video {
   border: 0;
   border-radius: 10px 10px 10px 0;
   overflow-wrap: break-word;
+  width: -moz-fit-content;
   width: fit-content;
   max-width: 70%;
   margin: 5px auto;

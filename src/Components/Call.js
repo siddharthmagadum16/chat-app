@@ -8,7 +8,7 @@ import "@mui/styled-engine";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { Container } from "@mui/material";
-import copyImg from "./copy.png";
+import copyImg from "../Assets/images/copy.png";
 
 function Call() {
   console.log(`env:  ${process.env.REACT_APP_ENV}`);

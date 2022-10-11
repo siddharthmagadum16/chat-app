@@ -8,8 +8,9 @@ function Home() {
   const roomRef = useRef();
 
   function createRoom() {
+    console.log(`env:|${process.env.REACT_APP_ENV}|`)
     const url =
-      process.env.REACT_APP_ENV === "PRODUCTION"
+      process.env.REACT_APP_ENV == "PRODUCTION"
         ? "https://video-chat-heroku-server.herokuapp.com/"
         : "http://localhost:4000/";
     axios(url, {

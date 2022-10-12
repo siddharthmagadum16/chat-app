@@ -11,9 +11,9 @@ import copyImg from "../Assets/images/copy.png";
 
 function Call() {
   const url =
-        process.env.REACT_APP_ENV === "DEVELOPMENT"
-        ? "http://localhost:4000/"
-        : "https://video-chat-heroku-server.herokuapp.com/";
+    process.env.REACT_APP_ENV === "DEVELOPMENT"
+      ? "http://localhost:4000/"
+      : "https://blue-good-cod.cyclic.app/";
   const socket = io(url);
 
   const myPeer = new Peer(undefined, {

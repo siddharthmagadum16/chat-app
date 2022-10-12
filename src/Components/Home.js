@@ -12,7 +12,7 @@ function Home() {
     const url =
         process.env.REACT_APP_ENV === "DEVELOPMENT"
         ? "http://localhost:4000/"
-        : "https://video-chat-heroku-server.herokuapp.com/";
+        : "https://blue-good-cod.cyclic.app/";
     axios(url, {
       method: "GET",
       mode: "cors",

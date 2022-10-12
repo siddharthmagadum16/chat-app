@@ -10,9 +10,9 @@ function Home() {
   function createRoom() {
     console.log(`env:|${process.env.REACT_APP_ENV}|`)
     const url =
-      process.env.REACT_APP_ENV == "PRODUCTION"
-        ? "https://video-chat-heroku-server.herokuapp.com/"
-        : "http://localhost:4000/";
+        process.env.REACT_APP_ENV === "DEVELOPMENT"
+        ? "http://localhost:4000/"
+        : "https://video-chat-heroku-server.herokuapp.com/";
     axios(url, {
       method: "GET",
       mode: "cors",

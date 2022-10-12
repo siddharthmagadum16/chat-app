@@ -7,21 +7,19 @@ import SendIcon from "@mui/icons-material/Send";
 import "@mui/styled-engine";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import { Container } from "@mui/material";
 import copyImg from "../Assets/images/copy.png";
 
 function Call() {
-  console.log(`env:  ${process.env.REACT_APP_ENV}`);
   const url =
-    process.env.REACT_APP_ENV === "PRODUCTION"
-      ? "https://video-chat-heroku-server.herokuapp.com/"
-      : "http://localhost:4000/";
+        process.env.REACT_APP_ENV === "DEVELOPMENT"
+        ? "http://localhost:4000/"
+        : "https://video-chat-heroku-server.herokuapp.com/";
   const socket = io(url);
 
   const myPeer = new Peer(undefined, {
     key: "peerjs",
     debug: 2,
-    secure: process.env.REACT_APP_ENV === "PRODUCTION" ? true : false, // secure : false for http connection
+    secure: process.env.REACT_APP_ENV === "DEVELOPMENT" ? false : true, // secure : false for http connection
   });
 
   const myVideo = document.createElement("video");

@@ -3,16 +3,15 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import "./Home.css";
+import { BACKEND_URL, DEV } from "../constants";
 
 function Home() {
   const roomRef = useRef();
 
   function createRoom() {
-    console.log(`env:|${process.env.REACT_APP_ENV}|`)
+    console.log(`env:|${process.env.REACT_APP_ENV}|`);
     const url =
-        process.env.REACT_APP_ENV === "DEVELOPMENT"
-        ? "http://localhost:4000/"
-        : "https://blue-good-cod.cyclic.app/";
+      process.env.REACT_APP_ENV !== DEV ? BACKEND_URL.PROD : BACKEND_URL.DEV;
     axios(url, {
       method: "GET",
       mode: "cors",
@@ -36,7 +35,9 @@ function Home() {
             Enter Room
           </Button>
           <div className="text">OR</div>
-          <div className="text">Enter the room code provided in the existing room</div>
+          <div className="text">
+            Enter the room code provided in the existing room
+          </div>
 
           <TextField
             id="filled-basic roomid-input"

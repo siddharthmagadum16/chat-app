@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState, useEffect } from "react";
+import React, { Fragment, useRef, useEffect } from "react";
 import { io } from "socket.io-client";
 import Peer from "peerjs";
 import "./Call.css";
@@ -8,18 +8,17 @@ import "@mui/styled-engine";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import copyImg from "../Assets/images/copy.png";
+import { DEV, BACKEND_URL } from "../constants";
 
 function Call() {
   const url =
-    process.env.REACT_APP_ENV === "DEVELOPMENT"
-      ? "http://localhost:4000/"
-      : "https://blue-good-cod.cyclic.app/";
+    process.env.REACT_APP_ENV !== DEV ? BACKEND_URL.PROD : BACKEND_URL.DEV;
   const socket = io(url);
 
   const myPeer = new Peer(undefined, {
     key: "peerjs",
     debug: 2,
-    secure: process.env.REACT_APP_ENV === "DEVELOPMENT" ? false : true, // secure : false for http connection
+    secure: process.env.REACT_APP_ENV !== DEV ? true : false, // secure : false for http connection
   });
 
   const myVideo = document.createElement("video");

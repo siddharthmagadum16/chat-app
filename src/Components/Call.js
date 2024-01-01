@@ -13,7 +13,10 @@ import { DEV, BACKEND_URL } from "../constants";
 function Call() {
   const url =
     process.env.REACT_APP_ENV !== DEV ? BACKEND_URL.PROD : BACKEND_URL.DEV;
-  const socket = io(url);
+  const socket = io(url, {
+    reconnectionAttempts: 10,
+    transports: ["websocket", "polling"],
+  });
 
   const myPeer = new Peer(undefined, {
     key: "peerjs",
